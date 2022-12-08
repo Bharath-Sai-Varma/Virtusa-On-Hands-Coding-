@@ -1,0 +1,21 @@
+--Demonstrating how exception can be handled in plsql
+CREATE OR REPLACE procedure director_by_movie_name(name varchar) is
+    director VARCHAR(100);
+BEGIN
+    select 
+        movie_director
+    into 
+        director
+    from
+        movies
+    where
+        movie_name=name;
+    dbms_output.put_line('Director is : '||director);
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            dbms_OUTPUT.PUT_LINE('No movie found with name :'||director);
+END;
+/
+
+exec director_by_movie_name('hit-2');--Gives exception 
+exec director_by_movie_name('AVATAR');--No Exception
