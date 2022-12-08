@@ -1,0 +1,20 @@
+--Getting Director Name By Passing Movie Name In PL/SQL
+CREATE OR REPLACE FUNCTION get_movie_by_screen(id int)RETURN VARCHAR2 IS
+    MOVIE VARCHAR(100);
+BEGIN
+    SELECT
+        MOVIE_NAME
+    INTO
+        MOVIE
+    FROM
+        MOVIES INNER JOIN SCREENS USING(MOVIE_ID)
+    WHERE 
+        SCREEN_ID=id;
+    RETURN MOVIE;
+END;
+/
+
+
+BEGIN
+    dbms_output.put_line(get_movie_by_screen(15));
+end;
